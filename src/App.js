@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import {useState} from 'react'
+import MessageList from './components/MessageList';
+import NewMessageForm from "./components/NewMessageForm";
 
-function App() {
+
+const App = () => {
+  const [messages, setMessages] = useState([])
+  const handleSend = newMessage => {
+    // Store the message and the message children.
+    setMessages([newMessage, ...messages]);
+  };
+
+  console.log(typeof handleSend);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <NewMessageForm onSend={handleSend} />
+      <MessageList data={messages} />
     </div>
   );
-}
+};
 
 export default App;
